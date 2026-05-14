@@ -233,7 +233,6 @@
         <div id="article-view" style="display: none;" class="container article-page">
             <button onclick="closeArticle()" class="btn-back" style="border:none; cursor:pointer; background:none; margin-top:2rem;">← Назад к темам</button>
             <article class="content-box" id="article-content">
-    
             </article>
             <div class="article-footer" style="margin-bottom: 3rem;">
                 <button onclick="closeArticle()" class="btn-secondary" style="border:none; cursor:pointer;">Вернуться на главную</button>
@@ -399,36 +398,45 @@
             `
         };
 
+        let currentArticleId = null;
         const mainView = document.getElementById('main-view');
         const articleView = document.getElementById('article-view');
         const articleContent = document.getElementById('article-content');
 
         window.openArticle = function(id) {
-            
             mainView.style.display = 'none';
             articleView.style.display = 'block';
             window.scrollTo(0, 0);
 
-            
             articleContent.innerHTML = articlesData[id];
-
             
-            let readArticles = JSON.parse(localStorage.getItem('finteen_read_list') || '[]');
-            if (!readArticles.includes(id)) {
-                readArticles.push(id);
-                localStorage.setItem('finteen_read_list', JSON.stringify(readArticles));
-                achievements.read = readArticles.length;
-                localStorage.setItem('finteen_ach', JSON.stringify(achievements));
-                addXP(10);
-                updateUI();
-            }
+            currentArticleId = id;
         };
+
+        const articleFooter = document.querySelector('.article-footer');
+        const articleObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && currentArticleId !== null) {
+                let readArticles = JSON.parse(localStorage.getItem('finteen_read_list') || '[]');
+                if (!readArticles.includes(currentArticleId)) {
+                    readArticles.push(currentArticleId);
+                    localStorage.setItem('finteen_read_list', JSON.stringify(readArticles));
+                    achievements.read = readArticles.length;
+                    localStorage.setItem('finteen_ach', JSON.stringify(achievements));
+                    addXP(10);
+                    updateUI();
+                }
+            }
+        }, { threshold: 0.1 });
+
+        if (articleFooter) {
+            articleObserver.observe(articleFooter);
+        }
 
         window.closeArticle = function() {
             articleView.style.display = 'none';
             mainView.style.display = 'block';
+            document.getElementById('modules').scrollIntoView({ behavior: 'smooth' });
         };
-
 
         document.querySelectorAll('header nav a').forEach(link => {
             link.addEventListener('click', () => {
@@ -438,7 +446,6 @@
             });
         });
 
-        
         let currentPage = 1;
         const page1 = document.getElementById('page-1');
         const page2 = document.getElementById('page-2');
@@ -466,7 +473,6 @@
             nextBtn.disabled = currentPage === 2;
         }
 
-        
         let userXP = parseInt(localStorage.getItem('finteen_xp') || '0');
         let achievements = JSON.parse(localStorage.getItem('finteen_ach') || '{"calc":false, "read":0, "quiz":false}');
 
@@ -507,7 +513,6 @@
             }
         }
 
-
         document.getElementById('calc-btn').addEventListener('click', function() {
             const goal = parseFloat(document.getElementById('goal').value);
             const savings = parseFloat(document.getElementById('savings').value);
@@ -535,7 +540,6 @@
             unlockAchievement('calc');
         });
 
-        
         document.getElementById('quiz-btn').addEventListener('click', function() {
             const questions = document.querySelectorAll('.question');
             let score = 0;
@@ -545,7 +549,6 @@
                 const correctValue = q.getAttribute('data-correct');
                 const labels = q.querySelectorAll('label');
 
-                
                 labels.forEach(l => {
                     l.style.backgroundColor = '';
                     l.style.borderColor = '';
@@ -559,7 +562,6 @@
                     } else {
                         selected.parentElement.classList.add('wrong-answer');
                         
-                        
                         labels.forEach(l => {
                             if (l.querySelector('input').value === correctValue) {
                                 l.classList.add('correct-answer');
@@ -568,7 +570,6 @@
                         });
                     }
                 } else {
-                    
                     labels.forEach(l => {
                         if (l.querySelector('input').value === correctValue) {
                             l.classList.add('correct-answer');
@@ -586,11 +587,9 @@
                 unlockAchievement('quiz');
             }
 
-            
             resultDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
 
-    
         updateUI();
     </script>
     <footer>

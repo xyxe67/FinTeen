@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -6,8 +5,8 @@
 }
 
 :root {
-    --bg-blue: #1e3a8a; 
-    --accent-yellow: #facc15; 
+    --bg-blue: #1e3a8a;
+    --accent-yellow: #facc15;
     --text-light: #ffffff;
     --text-dark: #1e293b;
     --body-bg: #f8fafc;
@@ -18,7 +17,7 @@ html {
 }
 
 body {
-    font-family: 'Inter', 'Segoe UI', Arial, sans-serif; 
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
     background-color: var(--body-bg);
@@ -29,7 +28,6 @@ body {
     max-width: 1200px;
     margin: 0 auto;
 }
-
 
 header {
     background-color: var(--bg-blue);
@@ -73,7 +71,6 @@ nav a:hover {
     color: var(--accent-yellow);
 }
 
-
 .hero {
     background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
     color: var(--text-light);
@@ -115,7 +112,6 @@ nav a:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(250, 204, 21, 0.4);
 }
-
 
 .modules {
     padding: 6rem 0;
@@ -181,7 +177,6 @@ nav a:hover {
 .btn-secondary:hover {
     opacity: 0.9;
 }
-
 
 .calculator {
     background-color: #fff;
@@ -253,7 +248,6 @@ nav a:hover {
     margin-bottom: 2.5rem;
 }
 
-
 .quiz-pages-container {
     position: relative;
     overflow: hidden;
@@ -309,7 +303,6 @@ nav a:hover {
     min-width: 120px;
     text-align: center;
 }
-
 
 .btn-back {
     display: inline-flex;
@@ -379,7 +372,6 @@ nav a:hover {
 .form-btn:hover {
     background-color: #eab308;
 }
-
 
 .stats {
     background-color: #fff;
@@ -476,7 +468,6 @@ nav a:hover {
     font-size: 0.9rem;
 }
 
-
 .correct-answer {
     background-color: #dcfce7 !important;
     border-color: #22c55e !important;
@@ -486,7 +477,6 @@ nav a:hover {
     background-color: #fee2e2 !important;
     border-color: #ef4444 !important;
 }
-
 
 .about {
     background-color: var(--bg-blue);
@@ -510,7 +500,6 @@ nav a:hover {
     line-height: 1.9;
 }
 
-
 footer {
     background-color: #0f172a;
     color: #94a3b8;
@@ -518,7 +507,6 @@ footer {
     padding: 3rem 0;
     font-size: 1rem;
 }
-
 
 .article-page {
     background-color: #f8fafc;
@@ -562,7 +550,6 @@ footer {
     font-size: 1.1rem;
 }
 
-
 mark, .highlight {
     background-color: rgba(250, 204, 21, 0.4);
     color: var(--bg-blue);
@@ -582,7 +569,6 @@ mark, .highlight {
         font-size: 1.8rem;
     }
 }
-
 
 @media (max-width: 768px) {
     header {
